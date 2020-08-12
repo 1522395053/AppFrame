@@ -27,6 +27,8 @@ public class CustomCachedLayoutManager extends RecyclerView.LayoutManager {
             return;
         }
 
+        int visibileItemCount=0;
+
         //初始化时
         int offsetY = 0;
 
@@ -41,7 +43,14 @@ public class CustomCachedLayoutManager extends RecyclerView.LayoutManager {
             layoutDecorated(viewForPosition,0,offsetY,decoratedMeasuredWidth,offsetY + decoratedMeasuredHeight);
 
             offsetY += decoratedMeasuredHeight;
+            //还未超出recyclerView 内容区域
+            if (offsetY < getVerticalSpace()){
+                visibileItemCount ++;
+            }
         }
+        visibileItemCount+=1;
+
+
 
         mTotalItemHeight = Math.max(offsetY,getVerticalSpace());
 //        mTotalItemHeight = offsetY;

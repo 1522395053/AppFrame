@@ -31,4 +31,28 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+
+
+    <TextView
+        android:id="@+id/tv_create_bug"
+        android:text="产生bug"
+        android:gravity="center"
+        android:background="#660000ff"
+        app:layout_constraintLeft_toLeftOf="@+id/rv_strings"
+        app:layout_constraintTop_toBottomOf="@+id/rv_strings"
+        android:layout_width="100dp"
+        android:layout_height="50dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_fix_bug"
+        android:text="修复bug"
+        android:gravity="center"
+        android:background="#660000ff"
+        app:layout_constraintRight_toRightOf="@+id/rv_strings"
+        app:layout_constraintTop_toBottomOf="@+id/rv_strings"
+        android:layout_width="100dp"
+        android:layout_height="50dp"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

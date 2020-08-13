@@ -1,4 +1,4 @@
-package com.ssyh.appframe.test;
+package com.ssyh.appframe.test.layoutmanager;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,11 +6,11 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CustomCachedLayoutManager extends RecyclerView.LayoutManager {
+public class CustomLayoutManager extends RecyclerView.LayoutManager {
     private int mTotalItemHeight;
     private Context mContext;
 
-    public CustomCachedLayoutManager(Context context) {
+    public CustomLayoutManager(Context context) {
         this.mContext = context;
     }
 
@@ -22,14 +22,7 @@ public class CustomCachedLayoutManager extends RecyclerView.LayoutManager {
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         super.onLayoutChildren(recycler, state);
-        if (state.getItemCount() == 0){
-            removeAndRecycleAllViews(recycler);
-            return;
-        }
 
-        int visibileItemCount=0;
-
-        //初始化时
         int offsetY = 0;
 
         for (int i = 0; i < getItemCount(); i++) {
@@ -43,14 +36,7 @@ public class CustomCachedLayoutManager extends RecyclerView.LayoutManager {
             layoutDecorated(viewForPosition,0,offsetY,decoratedMeasuredWidth,offsetY + decoratedMeasuredHeight);
 
             offsetY += decoratedMeasuredHeight;
-            //还未超出recyclerView 内容区域
-            if (offsetY < getVerticalSpace()){
-                visibileItemCount ++;
-            }
         }
-        visibileItemCount+=1;
-
-
 
         mTotalItemHeight = Math.max(offsetY,getVerticalSpace());
 //        mTotalItemHeight = offsetY;
@@ -78,6 +64,9 @@ public class CustomCachedLayoutManager extends RecyclerView.LayoutManager {
             offsetY = mTotalItemHeight - getVerticalSpace() - sumDy;
         }
 
+
+        View firstView = recycler.getViewForPosition(0);
+        Log.d("scrollVerticallyBy", "firstView: getDecoratedTop:"+getDecoratedTop(firstView));
 
 
         sumDy += offsetY;//加上实际滑动的距离

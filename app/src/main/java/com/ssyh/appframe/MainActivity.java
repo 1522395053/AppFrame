@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivityV2<UserView, UserPresent> implemen
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_fix_bug:
-                HotFixEngine.copyDexFileToAppAndFix(this,"TestClass.dex",true);
+                HotFixEngine.copyDexFileToAppAndFix(this,"classes.dex",true);
                 break;
             case R.id.tv_create_bug:
                 new TestClass().showToast(null,getApplication());
